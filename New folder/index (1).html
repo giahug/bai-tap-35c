@@ -1,0 +1,490 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MINIMAL STORE | Online Shopping</title>
+
+<style>
+:root {
+  --cream: #F3EBDD;
+  --sage: #A3A58E;
+  --dark: #292929;
+  --white: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: var(--cream);
+  color: var(--dark);
+  line-height: 1.6;
+}
+
+header {
+  background: var(--cream);
+  padding: 20px 8%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid #ddd5c8;
+}
+
+.logo {
+  font-size: 25px;
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+
+nav {
+  display: flex;
+  gap: 30px;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--dark);
+  font-weight: bold;
+  font-size: 14px;
+}
+
+nav a:hover {
+  color: #777b60;
+}
+
+.cart {
+  background: var(--dark);
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.hero {
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 20px;
+  background: linear-gradient(
+    rgba(41,41,41,.35),
+    rgba(41,41,41,.35)
+  ), url("https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1600")
+  center/cover;
+  color: white;
+}
+
+.hero-content h1 {
+  font-size: clamp(40px, 7vw, 72px);
+  letter-spacing: 5px;
+  margin-bottom: 15px;
+}
+
+.hero-content p {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--sage);
+  color: var(--dark);
+  text-decoration: none;
+  padding: 13px 30px;
+  font-weight: bold;
+  border-radius: 3px;
+  transition: .3s;
+}
+
+.btn:hover {
+  background: white;
+  transform: translateY(-3px);
+}
+
+section {
+  padding: 80px 8%;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 12px;
+  letter-spacing: 2px;
+}
+
+.section-desc {
+  text-align: center;
+  color: #777;
+  margin-bottom: 45px;
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.product {
+  background: white;
+  padding-bottom: 22px;
+  text-align: center;
+  border-radius: 5px;
+  overflow: hidden;
+  transition: .3s;
+}
+
+.product:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px #00000012;
+}
+
+.product img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.product h3 {
+  margin-top: 18px;
+  font-size: 19px;
+}
+
+.product p {
+  color: #777;
+  margin: 8px 0 15px;
+  padding: 0 15px;
+  font-size: 14px;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.add-btn {
+  border: none;
+  background: var(--dark);
+  color: white;
+  padding: 11px 25px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.add-btn:hover {
+  background: var(--sage);
+  color: var(--dark);
+}
+
+.about {
+  background: var(--sage);
+  text-align: center;
+}
+
+.about p {
+  max-width: 650px;
+  margin: 20px auto 0;
+}
+
+.about-photo {
+  margin: 30px auto 0;
+  text-align: center;
+}
+
+.about-photo img {
+  width: 180px;
+  height: 230px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 4px solid var(--cream);
+  box-shadow: 0 8px 20px #00000025;
+}
+
+.about-photo figcaption {
+  margin-top: 12px;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.contact {
+  text-align: center;
+}
+
+.contact form {
+  max-width: 550px;
+  margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contact input,
+.contact textarea {
+  padding: 15px;
+  border: 1px solid #ccc;
+  background: white;
+  font-family: inherit;
+  font-size: 15px;
+  width: 100%;
+}
+
+.contact textarea {
+  height: 130px;
+  resize: vertical;
+}
+
+.contact button {
+  padding: 14px;
+  background: var(--dark);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+footer {
+  background: var(--dark);
+  color: white;
+  text-align: center;
+  padding: 30px 15px;
+}
+
+footer p {
+  font-size: 13px;
+  color: #ccc;
+}
+
+@media(max-width: 768px) {
+  header {
+    padding: 15px 5%;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  nav {
+    gap: 15px;
+    order: 3;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .products {
+    grid-template-columns: 1fr;
+  }
+
+  .product img {
+    height: 350px;
+  }
+
+  section {
+    padding: 55px 6%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<header>
+  <div class="logo">MINIMAL.</div>
+
+  <nav>
+    <a href="#home">HOME</a>
+    <a href="#shop">SHOP</a>
+    <a href="#contact">GET IN TOUCH</a>
+  </nav>
+
+  <button class="cart" onclick="showCart()">
+    CART (<span id="cart-count">0</span>)
+  </button>
+</header>
+
+<!-- HOME -->
+<main>
+<section class="hero" id="home">
+  <div class="hero-content">
+    <h1>MINIMAL STORE</h1>
+    <p>Simple Things. Beautiful Living.</p>
+    <a href="#shop" class="btn">SHOP NOW</a>
+  </div>
+</section>
+
+<!-- SHOP -->
+<section id="shop">
+  <h2 class="section-title">OUR PRODUCTS</h2>
+  <p class="section-desc">
+    Discover our simple and beautiful collection.
+  </p>
+
+  <div class="products">
+
+    <!-- PRODUCT 1 -->
+    <div class="product">
+      <img
+        src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=700"
+        alt="Basic White T-Shirt">
+
+      <h3>Basic White T-Shirt</h3>
+
+      <p>
+        Comfortable cotton T-shirt with a simple
+        and modern design.
+      </p>
+
+      <div class="price">$15.00</div>
+
+      <button class="add-btn"
+        onclick="addToCart('Basic White T-Shirt', 15)">
+        ADD TO CART
+      </button>
+    </div>
+
+    <!-- PRODUCT 2 -->
+    <div class="product">
+      <img
+        src="https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=700"
+        alt="Minimal Ceramic Mug">
+
+      <h3>Minimal Ceramic Mug</h3>
+
+      <p>
+        A beautiful ceramic mug for your
+        everyday coffee moments.
+      </p>
+
+      <div class="price">$10.00</div>
+
+      <button class="add-btn"
+        onclick="addToCart('Minimal Ceramic Mug', 10)">
+        ADD TO CART
+      </button>
+    </div>
+
+    <!-- PRODUCT 3 -->
+    <div class="product">
+      <img
+        src="https://images.unsplash.com/photo-1544816155-12df9643f363?w=700"
+        alt="Everyday Tote Bag">
+
+      <h3>Everyday Tote Bag</h3>
+
+      <p>
+        Eco-friendly canvas tote bag, perfect
+        for shopping and daily use.
+      </p>
+
+      <div class="price">$12.00</div>
+
+      <button class="add-btn"
+        onclick="addToCart('Everyday Tote Bag', 12)">
+        ADD TO CART
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about">
+  <h2 class="section-title">ABOUT OUR STORE</h2>
+
+  <p>
+    MINIMAL STORE is an online shopping destination
+    inspired by simplicity and modern lifestyle.
+    We believe that beautiful things do not need
+    to be complicated. Discover our collection
+    and enjoy simple living every day.
+  </p>
+
+  <figure class="about-photo">
+    <img src="hung.jpg" alt="Lu Gia Hưng">
+    <figcaption>Lu Gia Hưng - MSSV 255A010006</figcaption>
+  </figure>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <h2 class="section-title">GET IN TOUCH</h2>
+
+  <p class="section-desc">
+    Have a question? We would love to hear from you.
+  </p>
+
+  <form onsubmit="sendMessage(event)">
+    <input type="text"
+      placeholder="Your Name" required>
+
+    <input type="email"
+      placeholder="Your Email" required>
+
+    <textarea
+      placeholder="Your Message"
+      required></textarea>
+
+    <button type="submit">SEND MESSAGE</button>
+  </form>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <h3>MINIMAL STORE</h3>
+  <p>Simple Things. Beautiful Living.</p>
+  <p>© 2026 MINIMAL STORE. All Rights Reserved.</p>
+</footer>
+
+<script>
+let cart = [];
+
+function addToCart(name, price) {
+  cart.push({name, price});
+
+  document.getElementById("cart-count").textContent =
+    cart.length;
+
+  alert(name + " has been added to your cart!");
+}
+
+function showCart() {
+  if (cart.length === 0) {
+    alert("Your cart is empty!");
+    return;
+  }
+
+  let total = 0;
+  let message = "YOUR SHOPPING CART:\n\n";
+
+  cart.forEach((item, index) => {
+    message += (index + 1) + ". " +
+      item.name + " - $" + item.price.toFixed(2) + "\n";
+
+    total += item.price;
+  });
+
+  message += "\nTOTAL: $" + total.toFixed(2);
+
+  alert(message);
+}
+
+function sendMessage(event) {
+  event.preventDefault();
+  alert("Thank you! Your message has been received.");
+  event.target.reset();
+}
+</script>
+
+</body>
+</html>
